@@ -32,20 +32,22 @@ for (let i = 0; i < class_list.length; i++) {
 console.log(inputАrray)
 
 let outputArray = [];
-
-for (let i = 0; i < inputАrray.length; i++) {
     let modifier = '--';
     let element = '_';
-    let array = inputАrray[i].split(' ');
-
-    for (let j = 0; j < array.length; j++) {
-        let isModifier = array[j].indexOf(modifier);
-        let isElement = array[j].indexOf(element);
-        if (isModifier === -1 && isElement === -1) {
-            outputArray.push(array[j]);
+    
+    for (let i = 0; i < inputАrray.length; i++) {
+        inputАrray[i] = inputАrray[i].trim();
+        inputАrray[i] = inputАrray[i].replace(/ {1,}/g," ");
+    
+        let array = inputАrray[i].split(' ');
+        for (let j = 0; j < array.length; j++) {
+            let isModifier = array[j].indexOf(modifier);
+            let isElement = array[j].indexOf(element);
+            if (isModifier === -1 && isElement === -1) {
+                outputArray.push(array[j]);
+            }
         }
     }
-}
 console.log("Скрипт");
 // console.log(outputArray);
 for (let i = 0; i < outputArray.length; i++) {
@@ -61,12 +63,13 @@ function create_bem_file(class_name) {
                     throw err;
                 
                 console.log('File created');
+                add_block_to_style(class_name);
             });
         } else {
             console.log("Файл уже существует");
         }
     });
-    add_block_to_style(class_name);
+   
 }
 
 function add_block_to_style(filename) {
@@ -77,6 +80,12 @@ function add_block_to_style(filename) {
                     throw err;
                 
                 console.log('File created');
+            });
+            fs.appendFile('./sass/style.scss', `@import "block/${filename}"; \n`, (err) => {
+                if (err) 
+                    throw err;
+                
+                console.log('Data has been added!');
             });
         } else {
             fs.appendFile('./sass/style.scss', `@import "block/${filename}"; \n`, (err) => {
