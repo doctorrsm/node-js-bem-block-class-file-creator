@@ -15,23 +15,40 @@ const htmlparser2 = require("htmlparser2");
 
 //Открываем файл и возвращаем строку
 const fs = require('fs');
-let fileContents = fs.readFileSync('./text.html').toString();
+let fileContents = fs.readFileSync('./index.html').toString();
 //console.log(fileContents)
 //Передаем строку в черри
 let $ = cheerio.load(fileContents);
 let class_list = $('*')
-let arr = [];
+let inputАrray = [];
 for (let i = 0; i < class_list.length; i++) {
     let item = class_list[i]['attribs']['class']
     if (item !== undefined) {
         console.log(item);
-        arr.push(item);
+        inputАrray.push(item);
     }
 
 }
 
-arr = ['page', 'navbar']
+console.log(inputАrray)
 
+let outputArray = [];
+
+for (let i = 0; i < inputАrray.length; i++) {
+    let modifier = '--';
+    let element = '_';
+    let array = inputАrray[i].split(' ');
+
+    for (let j = 0; j < array.length; j++) {
+        let isModifier = array[j].indexOf(modifier);
+        let isElement = array[j].indexOf(element);
+        if (isModifier === -1 && isElement === -1) {
+            outputArray.push(array[j]);
+        }
+    }
+}
+console.log("Скрипт");
+//console.log(outputArray);
 
 create_bem_file("newsassfile")
 
