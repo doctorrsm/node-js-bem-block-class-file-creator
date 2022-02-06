@@ -1,4 +1,4 @@
-//Получение списка файлов https://stackoverflow.com/questions/2727167/how-do-you-get-a-list-of-the-names-of-all-files-present-in-a-directory-in-node-j
+// Получение списка файлов https://stackoverflow.com/questions/2727167/how-do-you-get-a-list-of-the-names-of-all-files-present-in-a-directory-in-node-j
 // Чтение файла https://stackoverflow.com/questions/47409501/how-do-i-use-fs-readfile-to-read-an-html-file-in-node-js
 // Парсинг сайтов с помощью Node.js https://tproger.ru/translations/web-scraping-node-js/
 /*
@@ -13,11 +13,11 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 const htmlparser2 = require("htmlparser2");
 
-//Открываем файл и возвращаем строку
+// Открываем файл и возвращаем строку
 const fs = require('fs');
 let fileContents = fs.readFileSync('./index.html').toString();
-//console.log(fileContents)
-//Передаем строку в черри
+// console.log(fileContents)
+// Передаем строку в черри
 let $ = cheerio.load(fileContents);
 let class_list = $('*')
 let inputАrray = [];
@@ -27,7 +27,6 @@ for (let i = 0; i < class_list.length; i++) {
         console.log(item);
         inputАrray.push(item);
     }
-
 }
 
 console.log(inputАrray)
@@ -48,23 +47,21 @@ for (let i = 0; i < inputАrray.length; i++) {
     }
 }
 console.log("Скрипт");
-//console.log(outputArray);
+// console.log(outputArray);
+for (let i = 0; i < outputArray.length; i++) {
+    create_bem_file(outputArray[i]);
+}
 
-create_bem_file("newsassfile")
 
 function create_bem_file(class_name) {
-    fs.access("./index.html", function(error) {
+    fs.access(`./sass/${class_name}.scss`, function (error) {
         if (error) {
-
-
-            fs.open('index.html', 'w', (err) => {
-                if (err) throw err;
+            fs.open(`./sass/${class_name}.scss`, 'w', (err) => {
+                if (err) 
+                    throw err;
+                
                 console.log('File created');
             });
-
-
-
-
         } else {
             console.log("Файл уже существует");
         }
@@ -72,23 +69,20 @@ function create_bem_file(class_name) {
     add_block_to_style(class_name);
 }
 
-
 function add_block_to_style(filename) {
-    fs.access("./style.scss", function(error) {
+    fs.access("./sass/style.scss", function (error) {
         if (error) {
-
-
-            fs.open('./style.scss', 'w', (err) => {
-                if (err) throw err;
+            fs.open('./sass/style.scss', 'w', (err) => {
+                if (err) 
+                    throw err;
+                
                 console.log('File created');
             });
-
-
-
-
         } else {
-            fs.appendFile('./style.scss', `@import "block/${filename}"; \n`, (err) => {
-                if (err) throw err;
+            fs.appendFile('./sass/style.scss', `@import "block/${filename}"; \n`, (err) => {
+                if (err) 
+                    throw err;
+                
                 console.log('Data has been added!');
             });
         }
