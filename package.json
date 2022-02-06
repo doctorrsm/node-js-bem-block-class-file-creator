@@ -1,0 +1,26 @@
+{
+  "name": "js-bem-block-class-file-creator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/doctorrsm/node-js-bem-block-class-file-creator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/doctorrsm/node-js-bem-block-class-file-creator/issues"
+  },
+  "homepage": "https://github.com/doctorrsm/node-js-bem-block-class-file-creator#readme",
+  "dependencies": {
+    "axios": "^0.25.0",
+    "cheerio": "^1.0.0-rc.10",
+    "htmlparser2": "^7.2.0"
+  }
+}
